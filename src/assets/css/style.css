@@ -1296,4 +1296,63 @@ body::after {
     color: var(--text-muted, #666);
     margin-top: 10px;
     display: block;
+}/* Contact Page Styles */
+.contact-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+
+.contact-form-wrapper {
+    padding: 40px !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: #fff;
+}
+
+.contact-form button {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
 }
