@@ -125,5 +125,3 @@ try {
                     });
                 });
             }
-
-            // Minimalist Front-End Popup T
