@@ -1,8 +1,69 @@
 <?php
+session_start();
 require_once 'database/connection.php';
 
+// 1. Context initialization parameters
 $vehicleId = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+$customerId = 1; // Systemic baseline account reference token matching your customer schema
 
+// 2. DATABASE MECHANICS: Intercept submission and write directly into order_details schema
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_POST['action_type'] === 'stage_asset') {
+    try {
+        $pdo->beginTransaction();
+
+        // Locate or provision an active draft tracking token wrapper inside orders table using customer_id
+        $orderQuery = $pdo->prepare("SELECT id FROM orders WHERE customer_id = ? AND status = 'Pending' LIMIT 1");
+        $orderQuery->execute([$customerId]);
+        $activeOrder = $orderQuery->fetch();
+
+        if ($activeOrder) {
+            $orderId = $activeOrder['id'];
+        } else {
+            // FIXED: Providing clean systemic baseline defaults for required fields to satisfy strict schema constraints
+            $createOrder = $pdo->prepare("
+                INSERT INTO orders (
+                    customer_id, 
+                    status, 
+                    total_amount, 
+                    payment_method, 
+                    shipping_address
+                ) VALUES (?, 'Pending', 0.00, 'bank transfer', 'Staging Collection - Kigali Hub')
+            ");
+            $createOrder->execute([$customerId]);
+            $orderId = $pdo->lastInsertId();
+        }
+
+        // Extract current asset valuation info straight from inventory row safely
+        $carValQuery = $pdo->prepare("SELECT price FROM vehicles WHERE id = ?");
+        $carValQuery->execute([$vehicleId]);
+        $targetCar = $carValQuery->fetch();
+
+        if ($targetCar) {
+            $priceAtPurchase = $targetCar['price'];
+
+            // Confirm whether this precise slot allocation already exists inside order_details
+            $checkDetails = $pdo->prepare("SELECT id FROM order_details WHERE order_id = ? AND vehicle_id = ?");
+            $checkDetails->execute([$orderId, $vehicleId]);
+
+            if (!$checkDetails->fetch()) {
+                // Execute layout injection using your exact custom columns
+                $insertDetail = $pdo->prepare("INSERT INTO order_details (order_id, vehicle_id, quantity, price_at_purchase) VALUES (?, ?, 1, ?)");
+                $insertDetail->execute([$orderId, $vehicleId, $priceAtPurchase]);
+            }
+        }
+
+        $pdo->commit();
+        
+        // Redirect directly to the dashboard viewport wrapper
+        header("Location: garage.php");
+        exit();
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        die("Transaction processing error safely aborted: " . $e->getMessage());
+    }
+}
+
+// 3. READ OPERATIONAL PROTOCOLS: Gather vehicle specifications and 360° frame assets
 try {
     $stmt = $pdo->prepare("SELECT * FROM vehicles WHERE id = ?");
     $stmt->execute([$vehicleId]);
@@ -37,7 +98,7 @@ try {
         <div class="nav-container">
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
-                <a href="index.php">Showroom</a>
+                <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
                 <a href="garage.php" class="active">My Garage</a>
             </div>
@@ -46,11 +107,11 @@ try {
 
     <main class="container stacked-product-container">
         
-        <div id="popupOverlay" class="popup-overlay">
-            <div class="popup-card glass-panel">
-                <h3>⚡ ACTION INITIALIZED</h3>
-                <p>Test drive arrangement logged. Our concierge team at the Kigali staging hub will finalize tracking credentials shortly.</p>
-                <button id="closePopup" class="cta-primary-sm">Acknowledge</button>
+        <div id="popupOverlay" style="display: none; opacity: 0; transition: opacity 0.3s ease; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); align-items: center; justify-content: center; z-index: 9999;">
+            <div class="popup-card" style="background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); padding: 40px; text-align: center; border-radius: 8px; max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                <h3 style="letter-spacing: 2px; color: #fff; margin-bottom: 12px; font-weight: 900; font-family: sans-serif;">⚡ ACTION INITIALIZED</h3>
+                <p style="color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 24px; font-family: sans-serif;">Test drive arrangement logged. Our concierge team at the Kigali staging hub will finalize tracking credentials shortly.</p>
+                <button id="closePopup" style="background: #fff; color: #000; border: none; padding: 12px 28px; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; cursor: pointer;">Acknowledge</button>
             </div>
         </div>
 
@@ -61,7 +122,7 @@ try {
                 <?php endforeach; ?>
             </div>
             <div class="visualizer-controls-stacked">
-                <span class="control-label">DRAG TO ROTATE 360° EXPERIENCES</span>
+                <span class="control-label">DRAG TO ROTATE 360° </span>
                 <input type="range" min="0" max="<?php echo count($frames) - 1; ?>" value="0" class="rotation-slider" id="spinSlider">
                 <div class="frame-indicator">Showroom Frame: <span id="frameNum">1</span> / <?php echo count($frames); ?></div>
             </div>
@@ -74,7 +135,7 @@ try {
                     <h1><?php echo htmlspecialchars($car['brand'] . ' ' . $car['model_name']); ?></h1>
                 </div>
                 <div class="price-block">
-                    <span class="price-label">Acquisition Value</span>
+                    <span class="price-label">price</span>
                     <p class="product-price">$<?php echo number_format($car['price']); ?></p>
                 </div>
             </div>
@@ -82,23 +143,23 @@ try {
             <div class="performance-matrix-stacked">
                 <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['horsepower']); ?> BHP</span><span class="matrix-label">Output Power</span></div>
                 <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['top_speed_kmh']); ?> km/h</span><span class="matrix-label">V-Max Velocity</span></div>
-                <div class="matrix-item"><span class="matrix-value">Kigali Hub</span><span class="matrix-label">Staging Base</span></div>
+                <div class="matrix-item"><span class="matrix-value">Kigali Hub</span><span class="matrix-label">location</span></div>
             </div>
         </section>
 
         <section class="payment-panel-stacked glass-panel">
             <div class="secure-badge-row">
                 <div class="secure-title">
-                    <h3>FLEET MANAGEMENT INTERFACE</h3>
-                    <p>Select an operation protocol below to allocate this vehicle token to your portfolio.</p>
+                   
+                    <p> do you like this car?  </p>
                 </div>
             </div>
 
             <div class="dual-action-grid">
-                <button type="button" id="bookDriveBtn" class="cta-secondary">Book Local Test Drive</button>
+                <button type="button" id="bookDriveBtn" class="cta-secondary">Book Test Drive</button>
 
-                <form action="garage_process.php" method="POST">
-                    <input type="hidden" name="vehicle_id" value="<?php echo $car['id']; ?>">
+                <form action="" method="POST">
+                    <input type="hidden" name="action_type" value="stage_asset">
                     <button type="submit" class="cta-primary">Add to My Garage</button>
                 </form>
             </div>
@@ -107,7 +168,7 @@ try {
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 360 Frame Rotation Logic
+            // Slider rotation UI handlers
             const slider = document.getElementById('spinSlider');
             const frames = document.querySelectorAll('.spin-frame');
             const frameNumIndicator = document.getElementById('frameNum');
@@ -126,18 +187,21 @@ try {
                 });
             }
 
-            // Minimalist Front-End Popup Toggles
+            // Visual notification toggle controller
             const bookDriveBtn = document.getElementById('bookDriveBtn');
             const popupOverlay = document.getElementById('popupOverlay');
             const closePopup = document.getElementById('closePopup');
 
             if (bookDriveBtn && popupOverlay && closePopup) {
-                bookDriveBtn.addEventListener('click', () => {
-                    popupOverlay.classList.add('visible-popup');
+                bookDriveBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                    setTimeout(() => { popupOverlay.style.opacity = '1'; }, 10);
                 });
 
                 closePopup.addEventListener('click', () => {
-                    popupOverlay.classList.remove('visible-popup');
+                    popupOverlay.style.opacity = '0';
+                    setTimeout(() => { popupOverlay.style.display = 'none'; }, 300);
                 });
             }
         });

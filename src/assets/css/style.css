@@ -987,4 +987,255 @@ body::after {
     color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 24px;
+}/* ==========================================================================
+   MY GARAGE (PORTFOLIO HUB) INTERFACE STYLES
+   ========================================================================== */
+
+.garage-layout-wrapper {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.garage-header-block {
+    margin-bottom: 35px;
+}
+
+.garage-header-block h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.garage-header-block p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Empty State Card Overrides */
+.empty-garage-card {
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.empty-garage-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.empty-garage-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Main Splits Matrix Layout Dashboard Grid */
+.garage-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Left Axis Elements: Stacking Rows */
+.garage-slots-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.garage-asset-card {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    padding: 20px;
+    gap: 24px;
+    align-items: center;
+}
+
+.asset-image-box {
+    width: 100%;
+    height: 140px;
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.asset-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.asset-details-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.asset-meta h2 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.asset-specs-summary {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.asset-value-actions {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.asset-price-tag {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-red);
+}
+
+.asset-interactive-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.inspect-btn {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: background 0.2s, border 0.2s;
+}
+
+.inspect-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.evict-btn {
+    font-size: 11px;
+    color: #ef4444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.evict-btn:hover {
+    text-decoration: underline;
+}
+
+/* Right Axis Sticky Card Metrics Modules */
+.summary-sticky-card {
+    padding: 30px;
+    position: sticky;
+    top: 30px;
+}
+
+.summary-sticky-card h3 {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+.summary-label {
+    color: var(--text-muted);
+}
+
+.summary-value {
+    font-weight: 600;
+}
+
+.total-valuation-row {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-glass);
+}
+
+.total-valuation-row .summary-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-pure);
+}
+
+.total-valuation-row .summary-value {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--accent-red);
+}
+
+.summary-checkout-actions {
+    margin-top: 30px;
+}
+
+.continue-showroom-link {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.continue-showroom-link:hover {
+    color: var(--text-pure);
+}
+
+/* Responsive Grid Adapters */
+@media (max-width: 992px) {
+    .garage-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .garage-asset-card {
+        grid-template-columns: 180px 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .garage-asset-card {
+        grid-template-columns: 1fr;
+    }
+    .asset-details-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .asset-value-actions {
+        align-items: flex-start;
+        width: 100%;
+    }
 }
