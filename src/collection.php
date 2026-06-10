@@ -79,12 +79,12 @@ try {
 
     <main class="container">
         
-        <header class="hero-section">
+        <header class="collection-header-clean">
             <h1>THE KINETIK <span>FLEET</span></h1>
             <p>Inspect our comprehensive inventory of performance-engineered supercars currently marshaled in Kigali.</p>
         </header>
 
-        <section class="filter-wrapper">
+        <section class="filter-wrapper-clean">
             <form action="collection.php" method="GET">
                 
                 <div class="form-group">
@@ -129,7 +129,7 @@ try {
         <section class="showroom-grid">
             <?php if (!empty($vehicles)): ?>
                 <?php foreach ($vehicles as $vehicle): ?>
-                    <div class="car-card">
+                    <div class="car-card glass-panel">
                         
                         <div class="car-image-container">
                             <img src="<?php echo htmlspecialchars($vehicle['main_image']); ?>" alt="<?php echo htmlspecialchars($vehicle['brand'] . ' ' . $vehicle['model_name']); ?>">
@@ -155,7 +155,7 @@ try {
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <div class="no-results">
+                <div class="no-results glass-panel">
                     <p>No luxury units matched your chosen performance parameters.</p>
                     <a href="collection.php">Reset Search Catalog</a>
                 </div>

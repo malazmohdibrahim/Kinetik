@@ -97,10 +97,10 @@ INSERT INTO users (full_name, email, password_hash, phone, role, verification_ti
 
 -- Populate High-Performance Fleet Inventory
 INSERT INTO vehicles (brand, model_name, category, price, description, horsepower, top_speed_kmh, main_image) VALUES 
-('Lamborghini', 'Huracán', 'Supercar', 260000.00, 'A mid-engine masterwork blending an aggressive, sharp luxury design aesthetic with a high-revving, naturally aspirated 5.2-liter V10 engine.', 640, 325, 'assets/images/cars/huracan.png'),
-('Ferrari', '488 GTB', 'Supercar', 280000.00, 'An Italian icon combining an aerodynamic, low-profile stance with a ferocious twin-turbocharged V8 engine engineered for track-level responsiveness.', 670, 330, 'assets/images/cars/ferrari-488.png'),
-('McLaren', '720S', 'Hypercar', 310000.00, 'A futuristic performance hypercar engineered around a revolutionary carbon fiber Monocage chassis and an advanced proactive chassis control suspension.', 720, 341, 'assets/images/cars/mclaren-720s.png'),
-('Porsche', '911 Turbo S', 'Track Exotic', 230000.00, 'The definitive high-performance everyday supercar, delivering unparalleled dual-clutch acceleration, precision all-wheel drive, and twin-turbo tuning.', 650, 330, 'assets/images/cars/911-turbo-s.png');
+('Lamborghini', 'Huracán', 'Super', 260000.00, 'A mid-engine masterwork blending an aggressive, sharp luxury design aesthetic with a high-revving, naturally aspirated 5.2-liter V10 engine.', 640, 325, 'assets/images/cars/huracan.png'),
+('Ferrari', '488 GTB', 'sports', 280000.00, 'An Italian icon combining an aerodynamic, low-profile stance with a ferocious twin-turbocharged V8 engine engineered for track-level responsiveness.', 670, 330, 'assets/images/cars/ferrari-488.png'),
+('McLaren', '720S', 'Super', 310000.00, 'A futuristic performance hypercar engineered around a revolutionary carbon fiber Monocage chassis and an advanced proactive chassis control suspension.', 720, 341, 'assets/images/cars/mclaren-720s.png'),
+('Porsche', '911 Turbo S', 'sports', 230000.00, 'The definitive high-performance everyday supercar, delivering unparalleled dual-clutch acceleration, precision all-wheel drive, and twin-turbo tuning.', 650, 330, 'assets/images/cars/911-turbo-s.png');
 
 -- Populate Extended Angle Images for Detailed Lookups
 INSERT INTO vehicle_images (vehicle_id, image_path, caption) VALUES 
