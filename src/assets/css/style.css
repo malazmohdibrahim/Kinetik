@@ -623,4 +623,368 @@ body::after {
     color: var(--text-muted);
     letter-spacing: 1.5px;
     font-weight: 600;
+}/* ==========================================================================
+   PRODUCT DETAILS VIEW & 360° INTERACTIVE ENGINE
+   ========================================================================== */
+
+.product-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+    align-items: start;
+}
+
+/* Visualizer Left Column Frame */
+.visualizer-panel {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viewer-container {
+    width: 100%;
+    position: relative;
+    height: 380px; /* Constrains active view grid profile */
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-glass);
+}
+
+/* Hide all frames by default, display only active indexing */
+.spin-frame {
+    position: absolute;
+    max-width: 90%;
+    max-height: 85%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.05s ease-in-out;
+    pointer-events: none;
+}
+
+.spin-frame.active-frame {
+    opacity: 1;
+    position: relative;
+}
+
+/* Range Input Control Custom Track Overrides */
+.visualizer-controls {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.control-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.rotation-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+}
+
+.rotation-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-red);
+    cursor: ew-resize;
+    box-shadow: 0 0 8px var(--accent-red-glow);
+    transition: transform 0.1s;
+}
+
+.rotation-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.frame-indicator {
+    font-size: 11px;
+    margin-top: 10px;
+    color: var(--text-muted);
+}
+
+/* Content Panel Right Column Details styling */
+.details-panel {
+    padding: 35px;
+}
+
+.details-panel h1 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 10px 0 20px 0;
+    line-height: 1.1;
+}
+
+.details-panel h1 span {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.product-price {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+}
+
+.product-description {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.performance-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    border-top: 1px solid var(--border-glass);
+    border-bottom: 1px solid var(--border-glass);
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.matrix-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.matrix-value {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.matrix-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.width-100 {
+    width: 100%;
+    text-align: center;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--text-pure);
+}/* ==========================================================================
+   VERTICAL STACKED PRODUCT DETAIL VIEW STYLES
+   ========================================================================== */
+
+.stacked-product-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+/* 1. Top Card: Extended Visualizer */
+.visualizer-panel-stacked {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viewer-container-stacked {
+    width: 100%;
+    position: relative;
+    height: 440px; /* Elevated height window profile for top display */
+    background: #050505;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-glass);
+}
+
+.visualizer-controls-stacked {
+    width: 100%;
+    max-width: 600px; /* Centers the control path visually underneath */
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* 2. Middle Card: Specs Layout */
+.details-panel-stacked {
+    padding: 35px;
+}
+
+.details-header-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.details-header-split h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-top: 8px;
+}
+
+.price-block {
+    text-align: right;
+}
+
+.price-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-description-stacked {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 14px;
+    max-width: 900px;
+    margin-bottom: 30px;
+}
+
+.performance-matrix-stacked {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* 3. Bottom Card: Secure Payment Strip */
+.payment-panel-stacked {
+    padding: 30px;
+}
+
+.secure-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.secure-title h3 {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.secure-title p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.encryption-notice {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #10b981; /* Premium Emerald Accent for security checks */
+    background: rgba(16, 185, 129, 0.1);
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.payment-action-form {
+    width: 100%;
+}
+
+.payment-submit-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.back-link-stacked {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back-link-stacked:hover {
+    color: var(--text-pure);
+}/* Minimalist Dark Popup Screen Layer */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.popup-overlay.visible-popup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup-card {
+    max-width: 420px;
+    width: 90%;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid var(--border-glass);
+}
+
+.popup-card h3 {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--text-pure);
+    margin-bottom: 12px;
+}
+
+.popup-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
 }

@@ -120,3 +120,9 @@ INSERT INTO order_details (order_id, vehicle_id, quantity, price_at_purchase) VA
 -- Populate Sample Test Drive Entry
 INSERT INTO test_drives (customer_id, vehicle_id, booking_date, booking_time, status) VALUES 
 (1, 1, '2026-06-15', '14:00:00', 'Confirmed');
+
+-- =========================================================
+-- LIGHTWEIGHT SINGLE VEHICLE TESTING SEED (Lamborghini Only)
+-- =========================================================
+
+
