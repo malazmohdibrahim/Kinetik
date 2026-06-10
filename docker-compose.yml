@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Web App Server Layer (PHP + Apache container engine bundle)
   web:
@@ -24,7 +22,7 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root_master_password
       MYSQL_DATABASE: kinetik_db
