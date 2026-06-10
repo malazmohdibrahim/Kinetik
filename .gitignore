@@ -1,0 +1,31 @@
+# Local Environment Configurations (Crucial for security!)
+.env
+.env.local
+.env.*.local
+
+# Docker & System Logs
+*.log
+docker-volumes/
+.docker/
+
+# Dependency Directories (Let your CI build these fresh)
+node_modules/
+jspm_packages/
+web_drivers/
+target/
+.gradle/
+vendor/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE and Editor Directories
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
