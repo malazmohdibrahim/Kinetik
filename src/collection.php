@@ -80,8 +80,8 @@ try {
     <main class="container">
         
         <header class="collection-header-clean">
-            <h1>THE KINETIK <span>FLEET</span></h1>
-            <p>Inspect our comprehensive inventory of performance-engineered supercars currently marshaled in Kigali.</p>
+            <h1>our <span>collection</span></h1>
+            <p>Inspect our comprehensive fleet of performance-engineered supercars currently marshaled in Kigali.</p>
         </header>
 
         <section class="filter-wrapper-clean">

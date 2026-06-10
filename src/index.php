@@ -39,11 +39,10 @@ try {
 
     <header class="container">
         <div class="hero-content-clean">
-            <h1>UNCOMPROMISING <span>PERFORMANCE</span></h1>
-            <p>Experience Kigali's premiere selection of high-performance exotic supercars and track-calibrated machines.</p>
+            <h1>KINETIK<span>.</span></h1>
+            <p>Rwanda's premier destination for high-performance exotics. We source, marshal, and support elite international supercars directly from our staging center in Kigali.</p>
             <div class="hero-actions">
-                <a href="collection.php" class="cta-primary">Browse Collection</a>
-                <a href="contact.php" class="cta-secondary">Schedule Track Day</a>
+                <a href="collection.php" class="cta-primary">Browse Inventory</a>
             </div>
         </div>
     </header>
@@ -51,33 +50,31 @@ try {
     <main class="container">
         <section class="featured-section">
             <div class="section-header">
-                <h2>FEATURED INVENTORY</h2>
+                <h2>FEATURED CARS</h2>
                 <p>A handpicked selection of elite machinery currently available for acquisition.</p>
             </div>
 
-            <div class="showroom-grid">
+            <div class="showroom-grid-compact">
                 <?php if (!empty($featuredCars)): ?>
                     <?php foreach ($featuredCars as $car): ?>
-                        <div class="car-card glass-panel">
+                        <div class="car-card-compact glass-panel">
                             
-                            <div class="car-image-container">
+                            <div class="car-image-container-compact">
                                 <img src="<?php echo htmlspecialchars($car['main_image']); ?>" alt="<?php echo htmlspecialchars($car['brand'] . ' ' . $car['model_name']); ?>">
                             </div>
 
-                            <div class="car-details">
+                            <div class="car-details-compact">
                                 <span class="category-tag"><?php echo htmlspecialchars($car['category']); ?></span>
                                 <h3><?php echo htmlspecialchars($car['brand'] . ' ' . $car['model_name']); ?></h3>
                                 <p class="price">$<?php echo number_format($car['price']); ?></p>
                                 
-                                <div class="specs-summary">
-                                    <span class="spec-hp">Power: <?php echo htmlspecialchars($car['horsepower']); ?> HP</span>
-                                    <span class="spec-speed">V-Max: <?php echo htmlspecialchars($car['top_speed_kmh']); ?> km/h</span>
+                                <div class="specs-summary-compact">
+                                    <span><?php echo htmlspecialchars($car['horsepower']); ?> HP</span>
+                                    <span><?php echo htmlspecialchars($car['top_speed_kmh']); ?> km/h</span>
                                 </div>
 
-                                <p class="car-description"><?php echo htmlspecialchars($car['description']); ?></p>
-
-                                <div class="card-actions">
-                                    <a href="product.php?id=<?php echo $car['id']; ?>" class="accent-button">Show Details</a>
+                                <div class="card-actions-compact">
+                                    <a href="product.php?id=<?php echo $car['id']; ?>" class="accent-button-compact">Show Details</a>
                                 </div>
                             </div>
 
@@ -89,6 +86,25 @@ try {
                         <a href="collection.php">View Main Inventory Database</a>
                     </div>
                 <?php endif; ?>
+            </div>
+        </section>
+
+        <section class="stats-container glass-panel">
+            <div class="stat-item">
+                <span class="stat-number">04</span>
+                <span class="stat-label">Elite Brands</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2,600+</span>
+                <span class="stat-label">Horsepower Marshaled</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Track Certified</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">Kigali</span>
+                <span class="stat-label">Staging Hub</span>
             </div>
         </section>
     </main>
