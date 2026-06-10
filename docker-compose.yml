@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Web App Server Layer (PHP + Apache container engine bundle)
   web:
     build:
       context: .
@@ -8,5 +9,31 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/usr/share/nginx/html
+      - ./src:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_USER=kinetik_user
+      - DB_PASSWORD=super_secret_speed
+      - DB_NAME=kinetik_db
+    depends_on:
+      - db
     restart: always
+
+  # Database Engine Layer (MySQL Database Service Instance)
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_master_password
+      MYSQL_DATABASE: kinetik_db
+      MYSQL_USER: kinetik_user
+      MYSQL_PASSWORD: super_secret_speed
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/database:/docker-entrypoint-initdb.d # Automatically passes init.sql into startup run lists
+    restart: always
+
+volumes:
+  db_data:
