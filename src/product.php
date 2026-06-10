@@ -125,3 +125,22 @@ try {
                     });
                 });
             }
+
+            // Minimalist Front-End Popup Toggles
+            const bookDriveBtn = document.getElementById('bookDriveBtn');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const closePopup = document.getElementById('closePopup');
+
+            if (bookDriveBtn && popupOverlay && closePopup) {
+                bookDriveBtn.addEventListener('click', () => {
+                    popupOverlay.classList.add('visible-popup');
+                });
+
+                closePopup.addEventListener('click', () => {
+                    popupOverlay.classList.remove('visible-popup');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
