@@ -5,7 +5,10 @@ FROM php:8.2-apache
 RUN docker-php-ext-install pdo pdo_mysql
 
 # Explicitly tell Apache to handle .php files correctly instead of serving them as downloads
-RUN a2enmod rewrite
+# Disable the event MPM and enable the prefork MPM before starting
+RUN a2dismod mpm_event && \
+    a2enmod mpm_prefork && \
+    a2enmod rewrite
 
 # Set the working directory inside the container
 WORKDIR /var/www/html
