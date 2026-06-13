@@ -1,19 +1,16 @@
-# Use the official PHP 8.2 image with Apache built-in
 FROM php:8.2-apache
 
-# Install the PDO MySQL extension
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
 
-# FIX: Explicitly disable the default event MPM and enable prefork before enabling rewrite
-RUN a2dismod mpm_event && \
-    a2enmod mpm_prefork && \
-    a2enmod rewrite
+# This command replaces the default Apache config file entirely
+# which prevents the "More than one MPM loaded" error
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
+    && a2enmod rewrite
 
-# Set the working directory inside the container
 WORKDIR /var/www/html
-
-# Copy your local PHP application code into the server directory
 COPY ./src /var/www/html/
 
-# Expose web server traffic port
 EXPOSE 80
