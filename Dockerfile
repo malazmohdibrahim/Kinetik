@@ -1,13 +1,14 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
+# Install the PDO MySQL extension
 RUN docker-php-ext-install pdo pdo_mysql
 
-# This forces Apache to stop looking for the conflicting module files
-RUN echo "LoadModule mpm_prefork_module /usr/lib/apache2/modules/mod_mpm_prefork.so" > /etc/apache2/mods-enabled/mpm_prefork.load && \
-    rm -f /etc/apache2/mods-enabled/mpm_event.load /etc/apache2/mods-enabled/mpm_worker.load && \
-    a2enmod rewrite
-
+# Set the working directory
 WORKDIR /var/www/html
+
+# Copy your application code
 COPY ./src /var/www/html/
 
-EXPOSE 80
+# Use the built-in PHP development server to run your app
+# This avoids Apache and its MPM conflicts entirely
+CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www/html"]
