@@ -1,14 +1,17 @@
-FROM php:8.2-cli
+# Use the official PHP 8.2 image with Apache built-in
+FROM php:8.2-apache
 
-# Install the PDO MySQL extension
+# Install the PDO MySQL extension so PHP can talk to your database securely
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Set the working directory
+# Explicitly tell Apache to handle .php files correctly instead of serving them as downloads
+RUN a2enmod rewrite
+
+# Set the working directory inside the container
 WORKDIR /var/www/html
 
-# Copy your application code
+# Copy your local PHP application code into the server directory
 COPY ./src /var/www/html/
 
-# Use the built-in PHP development server to run your app
-# This avoids Apache and its MPM conflicts entirely
-CMD ["php", "-S", "0.0.0.0:80", "-t", "/var/www/html"]
+# Expose web server traffic port
+EXPOSE 80
