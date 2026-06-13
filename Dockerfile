@@ -1,16 +1,17 @@
+# Use the official PHP 8.2 image with Apache built-in
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
+# Install the PDO MySQL extension so PHP can talk to your database securely
+RUN docker-php-ext-install pdo pdo_mysql
 
-# This command replaces the default Apache config file entirely
-# which prevents the "More than one MPM loaded" error
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-    && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf \
-    && a2enmod rewrite
+# Explicitly tell Apache to handle .php files correctly instead of serving them as downloads
+RUN a2enmod rewrite
 
+# Set the working directory inside the container
 WORKDIR /var/www/html
+
+# Copy your local PHP application code into the server directory
 COPY ./src /var/www/html/
 
+# Expose web server traffic port
 EXPOSE 80
