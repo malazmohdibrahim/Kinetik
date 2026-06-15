@@ -45,14 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
     <main class="glass-panel" style="width: 450px; padding: 40px;">
         <h2 style="text-align:center; margin-bottom:20px;">SYSTEM ACCESS</h2> <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.php" class="logo">KINETIK<span>.</span></a>
-            <div class="nav-links">
-                <a href="index.php">home</a>
-                <a href="collection.php">Collection</a>
-                <a href="garage.php">My Garage</a>
-            </div>
-        </div>
+    
     </nav>
         <?php if($message) echo "<p style='color:var(--accent-red); text-align:center; font-size:12px;'>$message</p>"; ?>
         
