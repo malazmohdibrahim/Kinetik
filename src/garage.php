@@ -72,7 +72,7 @@ try {
             <div class="nav-links">
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
-                <a href="garage.php" class="active">My Garage</a>
+                
             </div>
         </div>
     </nav>
@@ -80,14 +80,14 @@ try {
     <main class="container garage-layout-wrapper" style="margin-top: 40px; margin-bottom: 60px;">
         <header class="garage-header-block" style="margin-bottom: 35px;">
             <span class="category-tag">my garage</span>
-            <h1 style="font-size: 36px; font-weight: 900; margin-top: 8px; letter-spacing: 1px; color: #fff;">MY GARAGE HOLDINGS</h1>
-            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Active structural rows securely queried straight from order_details allocations matrix.</p>
+            <h1 style="font-size: 36px; font-weight: 900; margin-top: 8px; letter-spacing: 1px; color: #fff;">MY Cars</h1>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">you have a good eye for strong performance cars .</p>
         </header>
 
         <?php if (empty($allocatedCars)): ?>
             <div class="glass-panel empty-garage-card" style="text-align: center; padding: 80px 40px; max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px;">
-                <h3 style="font-size: 18px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; color: #fff;">NO TOKENS ALLOCATED</h3>
-                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">Your staging entries matrix currently reflects clean database spaces.</p>
+                <h3 style="font-size: 18px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; color: #fff;">YOUR GARAGE IS EMPTY</h3>
+                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">Browse our collection to see if anything represents what ypure looking for.</p>
                 <a href="index.php" class="cta-primary" style="display: inline-block; padding: 12px 24px; background: #fff; color: #000; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; text-decoration: none; border-radius: 4px;">Browse Showroom Inventory</a>
             </div>
         <?php else: ?>
@@ -109,7 +109,7 @@ try {
                                     <span class="asset-price-tag" style="font-size: 20px; font-weight: 800; color: #fff;">$<?php echo number_format($car['price_at_purchase']); ?></span>
                                     <div class="asset-interactive-links" style="display: flex; gap: 12px; align-items: center;">
                                         <a href="product.php?id=<?php echo $car['vehicle_real_id']; ?>" class="inspect-btn" style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #fff; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.15); padding: 6px 14px; border-radius: 4px; background: rgba(255, 255, 255, 0.02);">Inspect 360°</a>
-                                        <a href="garage.php?remove=<?php echo $car['tracking_detail_id']; ?>" class="evict-btn" style="font-size: 11px; color: #ef4444; text-decoration: none; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Evict Slot</a>
+                                        <a href="garage.php?remove=<?php echo $car['tracking_detail_id']; ?>" class="evict-btn" style="font-size: 11px; color: #ef4444; text-decoration: none; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">remove</a>
                                     </div>
                                 </div>
                             </div>
