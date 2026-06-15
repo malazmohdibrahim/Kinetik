@@ -30,8 +30,8 @@ try {
                 <a href="collection.php">Collection</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
-                <a href="garage.php">my</a>
-                <a href="login.php">Profile</a>
+                <a href="garage.php">my garage</a>
+                <a href="login.php">Login</a>
                 <a href="admin.php">Admin</a>
             </div>
         </div>
