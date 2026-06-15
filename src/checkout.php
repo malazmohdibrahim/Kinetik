@@ -2,10 +2,16 @@
 session_start();
 require_once 'database/connection.php';
 
-$customerId = 1;
+// Enforce active authentication session gatekeeping dynamically
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$customerId = $_SESSION['user_id'];
 $success = false;
 
-// Fetch pending order
+// Fetch pending order matching active customer ID session
 $stmt = $pdo->prepare("SELECT id FROM orders WHERE customer_id = ? AND status = 'Pending' LIMIT 1");
 $stmt->execute([$customerId]);
 $order = $stmt->fetch();
@@ -62,14 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $order) {
                 <div class="form-group">
                     <label>Payment Method</label>
                     <select name="payment_method">
-                        <option>Bank Transfer</option><option>Credit Card</option>
-                        <option>Mobile Money</option><option>Crypto</option>
+                        <option>Bank Transfer</option>
+                        <option>Credit Card</option>
+                        <option>Mobile Money</option>
+                        <option>Crypto</option>
                     </select>
                 </div>
-                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px;"></button>
+                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px; border: none; padding: 14px; background: #fff; color: #000; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; border-radius: 4px; cursor: pointer;">Confirm Order Allocation</button>
             </form>
         <?php else: ?>
-            <p>No pending orders found. <a href="index.php">Browse inventory</a>.</p>
+            <p>No pending orders found. <a href="collection.php">Browse inventory</a>.</p>
         <?php endif; ?>
     </main>
 </body>
