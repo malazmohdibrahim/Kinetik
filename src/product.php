@@ -4,19 +4,16 @@ require_once 'database/connection.php';
 
 // 1. Context initialization parameters
 $vehicleId = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-$isLoggedIn = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']); // Enforce strict true/false baseline
+$isLoggedIn = isset($_SESSION['user_id']);
+$customerId = $isLoggedIn ? $_SESSION['user_id'] : null;
 
 // 2. DATABASE MECHANICS: Intercept submission and write directly into order_details schema
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_POST['action_type'] === 'stage_asset') {
-    
-    // Hard check: Bounces requests back to login page immediately if user status evaluates to false
+    // Hard check: Block processing if an unauthenticated user somehow targets the endpoint
     if (!$isLoggedIn) {
         header("Location: login.php");
         exit();
     }
-
-    // Capture explicit ID mapping now that authentication state is proven true
-    $customerId = $_SESSION['user_id']; 
 
     try {
         $pdo->beginTransaction();
@@ -73,4 +70,157 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_P
 }
 
 // 3. READ OPERATIONAL PROTOCOLS: Gather vehicle specifications and 360° frame assets
-// ... rest of your code remains identical
+try {
+    $stmt = $pdo->prepare("SELECT * FROM vehicles WHERE id = ?");
+    $stmt->execute([$vehicleId]);
+    $car = $stmt->fetch();
+
+    if (!$car) {
+        die("Vehicle not found in showroom inventory.");
+    }
+
+    $imgStmt = $pdo->prepare("SELECT image_path, caption FROM vehicle_images WHERE vehicle_id = ? ORDER BY caption ASC");
+    $imgStmt->execute([$vehicleId]);
+    $frames = $imgStmt->fetchAll();
+
+    if (empty($frames)) {
+        $frames[] = ['image_path' => $car['main_image'], 'caption' => 'Default Main View'];
+    }
+} catch (Exception $e) {
+    die("Database Error: " . $e->getMessage());
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetik | <?php echo htmlspecialchars($car['brand'] . ' ' . $car['model_name']); ?></title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.php" class="logo">KINETIK<span>.</span></a>
+            <div class="nav-links">
+                <a href="index.php">home</a>
+                <a href="collection.php">Collection</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact us</a>
+                <a href="garage.php" class="active">My Garage</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container stacked-product-container">
+        
+        <div id="popupOverlay" style="display: none; opacity: 0; transition: opacity 0.3s ease; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); align-items: center; justify-content: center; z-index: 9999;">
+            <div class="popup-card" style="background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); padding: 40px; text-align: center; border-radius: 8px; max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                <h3 style="letter-spacing: 2px; color: #fff; margin-bottom: 12px; font-weight: 900; font-family: sans-serif;">CONFIRMED</h3>
+                <p style="color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 24px; font-family: sans-serif;">We will contact you shortly.</p>
+                <button id="closePopup" style="background: #fff; color: #000; border: none; padding: 12px 28px; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; cursor: pointer;">Acknowledge</button>
+            </div>
+        </div>
+
+        <section class="visualizer-panel-stacked glass-panel">
+            <div class="viewer-container-stacked">
+                <?php foreach ($frames as $index => $frame): ?>
+                    <img src="<?php echo htmlspecialchars($frame['image_path']); ?>" class="spin-frame <?php echo $index === 0 ? 'active-frame' : ''; ?>" data-index="<?php echo $index; ?>">
+                <?php endforeach; ?>
+            </div>
+            <div class="visualizer-controls-stacked">
+                <span class="control-label">DRAG TO ROTATE 360° </span>
+                <input type="range" min="0" max="<?php echo count($frames) - 1; ?>" value="0" class="rotation-slider" id="spinSlider">
+                <div class="frame-indicator">Showroom Frame: <span id="frameNum">1</span> / <?php echo count($frames); ?></div>
+            </div>
+        </section>
+
+        <section class="details-panel-stacked glass-panel">
+            <div class="details-header-split">
+                <div>
+                    <span class="category-tag"><?php echo htmlspecialchars($car['category']); ?></span>
+                    <h1><?php echo htmlspecialchars($car['brand'] . ' ' . $car['model_name']); ?></h1>
+                </div>
+                <div class="price-block">
+                    <span class="price-label">price</span>
+                    <p class="product-price">$<?php echo number_format($car['price']); ?></p>
+                </div>
+            </div>
+            <p class="product-description-stacked"><?php echo htmlspecialchars($car['description'] ?? ''); ?></p>
+            <div class="performance-matrix-stacked">
+                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['horsepower'] ?? 'N/A'); ?> BHP</span><span class="matrix-label">Output Power</span></div>
+                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['top_speed_kmh'] ?? 'N/A'); ?> km/h</span><span class="matrix-label">V-Max Velocity</span></div>
+                <div class="matrix-item"><span class="matrix-value">Kigali Hub</span><span class="matrix-label">location</span></div>
+            </div>
+        </section>
+
+        <section class="payment-panel-stacked glass-panel">
+            <div class="secure-badge-row">
+                <div class="secure-title">
+                    <p>Do you like this car?</p>
+                </div>
+            </div>
+
+            <div class="dual-action-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <?php if ($isLoggedIn): ?>
+                    <button type="button" id="bookDriveBtn" class="cta-secondary">Book Test Drive</button>
+
+                    <form action="" method="POST" style="margin: 0;">
+                        <input type="hidden" name="action_type" value="stage_asset">
+                        <button type="submit" class="cta-primary" style="width: 100%;">Add to My Garage</button>
+                    </form>
+                <?php else: ?>
+                    <div style="grid-column: span 2; text-align: center; padding: 20px 10px; background: rgba(255, 255, 255, 0.01); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 4px;">
+                        <p style="font-size: 13px; color: #888; margin-bottom: 16px; font-weight: 500;">Please log in to unlock test drives or build your performance garage allocation.</p>
+                        <a href="login.php" class="cta-primary" style="display: inline-block; text-align: center; width: auto; min-width: 200px; box-sizing: border-box; padding: 14px 32px; background: #1e1b4b; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; text-decoration: none; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.1); transition: background 0.2s ease;">
+                            Login first
+                        </a>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Slider rotation UI handlers
+            const slider = document.getElementById('spinSlider');
+            const frames = document.querySelectorAll('.spin-frame');
+            const frameNumIndicator = document.getElementById('frameNum');
+            
+            if (slider && frames.length > 0) {
+                slider.addEventListener('input', (e) => {
+                    const targetIndex = parseInt(e.target.value, 10);
+                    frameNumIndicator.textContent = targetIndex + 1;
+                    frames.forEach(img => {
+                        if (parseInt(img.getAttribute('data-index'), 10) === targetIndex) {
+                            img.classList.add('active-frame');
+                        } else {
+                            img.classList.remove('active-frame');
+                        }
+                    });
+                });
+            }
+
+            // Visual notification toggle controller
+            const bookDriveBtn = document.getElementById('bookDriveBtn');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const closePopup = document.getElementById('closePopup');
+
+            if (bookDriveBtn && popupOverlay && closePopup) {
+                bookDriveBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                    setTimeout(() => { popupOverlay.style.opacity = '1'; }, 10);
+                });
+
+                closePopup.addEventListener('click', () => {
+                    popupOverlay.style.opacity = '0';
+                    setTimeout(() => { popupOverlay.style.display = 'none'; }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
