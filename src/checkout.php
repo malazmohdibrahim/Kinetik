@@ -43,13 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $order) {
     <main class="container" style="max-width: 600px; margin: 80px auto;">
         <?php if ($success): ?>
             <div class="glass-panel" style="text-align: center; padding: 60px;">
-                <h1 style="color: #fff;">DISPATCH APPROVED</h1>
-                <p style="color: var(--text-muted);">Your order has been confirmed. Our team at the Kigali hub is preparing your assets for transit.</p>
-                <a href="index.php" class="cta-primary" style="display:inline-block; margin-top:20px;">Return to Showroom</a>
+                <h1 style="color: #ff3e3e;">Order Confirmed</h1>
+                <p style="color: var(--text-muted);">Your order has been confirmed. we've emailed you the delivery details.</p>
+                <a href="index.php" class="cta-primary" style="display:inline-block; margin-top:20px;">Return</a>
             </div>
         <?php elseif ($order): ?>
             <a href="garage.php" style="color: var(--text-muted); font-size: 12px;">← BACK TO GARAGE</a>
-            <h1 style="margin: 20px 0;">FINAL ALLOCATION</h1>
+            <h1 style="margin: 20px 0;">CHECKOUT</h1>
             <form method="POST" class="checkout-box">
                 <div class="form-group">
                     <label>Shipping Address</label>
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $order) {
                         <option>Mobile Money</option><option>Crypto</option>
                     </select>
                 </div>
-                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px;">APPROVE & INITIATE DISPATCH</button>
+                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px;">Confirm </button>
             </form>
         <?php else: ?>
             <p>No pending orders found. <a href="index.php">Browse inventory</a>.</p>
