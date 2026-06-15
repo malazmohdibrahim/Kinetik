@@ -1,9 +1,9 @@
 <?php
 // Secure Database Connection Module using PDO
-$host = 'db'; // Matches the MySQL service name inside your docker-compose.yml
-$db   = 'kinetik_db';
-$user = 'kinetik_user';
-$pass = 'super_secret_speed';
+$host = 'sql202.infinityfree.com'; // Matches the MySQL service name inside your docker-compose.yml
+$db   = 'if0_42187554_init';
+$user = 'if0_42187554';
+$pass = 'malaz321';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
