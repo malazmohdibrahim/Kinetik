@@ -67,12 +67,11 @@ try {
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
                 <a href="index.php">Home</a>
-                <a href="collection.php" class="active">Collection</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
-                <a href="cart.php">Cart</a>
-                <a href="profile.php">Profile</a>
-                <a href="admin.php">Admin</a>
+                <a href="garage.php">My Garage</a>
+                
+                
             </div>
         </div>
     </nav>
@@ -81,19 +80,19 @@ try {
         
         <header class="collection-header-clean">
             <h1>our <span>collection</span></h1>
-            <p>Inspect our comprehensive fleet of performance-engineered supercars currently marshaled in Kigali.</p>
+            <p>Inspect our comprehensive collection of performance-engineered supercars currently marshaled in Kigali.</p>
         </header>
 
         <section class="filter-wrapper-clean">
             <form action="collection.php" method="GET">
                 
                 <div class="form-group">
-                    <label>Search Inventory</label>
+                    <label>Search </label>
                     <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="e.g. Huracán or Porsche...">
                 </div>
 
                 <div class="form-group">
-                    <label>Classification</label>
+                    <label>Category</label>
                     <select name="category">
                         <option value="">All Categories</option>
                         <?php foreach ($availableCategories as $cat): ?>
@@ -105,7 +104,7 @@ try {
                 </div>
 
                 <div class="form-group">
-                    <label>Marque / Brand</label>
+                    <label>Brand</label>
                     <select name="brand">
                         <option value="">All Brands</option>
                         <?php foreach ($availableBrands as $b): ?>
@@ -156,7 +155,7 @@ try {
                 <?php endforeach; ?>
             <?php else: ?>
                 <div class="no-results glass-panel">
-                    <p>No luxury units matched your chosen performance parameters.</p>
+                    <p>No cars that fit description.</p>
                     <a href="collection.php">Reset Search Catalog</a>
                 </div>
             <?php endif; ?>
@@ -166,8 +165,8 @@ try {
 
     <footer class="footer">
         <div class="footer-container">
-            <p>&copy; 2026 Kinetik Luxury Motors. All Rights Reserved.</p>
-            <p class="academic-credit">UNILAK Final Project | E-Commerce & Web Applications</p>
+            <p>&copy; 2026 Kinetik Luxury Motors. Created by Malaz</p>
+            <p class="academic-credit">24579/2024</p>
         </div>
     </footer>
 
