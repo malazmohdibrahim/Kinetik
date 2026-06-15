@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <form method="POST">
             <div class="form-group" id="reg-fields" style="display:none;">
-                  <a href="index.php">return</a>
+              
                 <label>Full Name</label>
                 <input type="text" name="full_name" style="width:100%; margin-bottom:10px;">
                 <label>Phone Contact</label>
@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" name="action" value="register" id="reg-submit" class="cta-primary" style="display:none; flex:1;">REGISTER</button>
             </div>
         </form>
+            <a href="index.php">return home </a>
     </main>
 
     <script>

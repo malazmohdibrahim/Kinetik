@@ -1,4 +1,7 @@
 <?php
+// Start the session to track user authorization status
+session_start();
+
 // 1. Establish the unified secure data layer link
 require_once 'database/connection.php';
 
@@ -6,6 +9,9 @@ require_once 'database/connection.php';
 $search   = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
 $brand    = isset($_GET['brand']) ? trim($_GET['brand']) : '';
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
 
 // 3. Construct the base relational query pattern
 $query = "SELECT * FROM vehicles WHERE 1=1";
@@ -141,14 +147,18 @@ try {
                             <p class="price">$<?php echo number_format($vehicle['price']); ?></p>
                             
                             <div class="specs-summary">
-                                <span class="spec-hp">Horsepower: <?php echo htmlspecialchars($vehicle['horsepower']); ?> HP</span>
-                                <span class="spec-speed">Top Speed: <?php echo htmlspecialchars($vehicle['top_speed_kmh']); ?> km/h</span>
+                                <span class="spec-hp">Horsepower: <?php echo htmlspecialchars($vehicle['horsepower'] ?? 'N/A'); ?> HP</span>
+                                <span class="spec-speed">Top Speed: <?php echo htmlspecialchars($vehicle['top_speed_kmh'] ?? 'N/A'); ?> km/h</span>
                             </div>
 
-                            <p class="car-description"><?php echo htmlspecialchars($vehicle['description']); ?></p>
+                            <p class="car-description"><?php echo htmlspecialchars($vehicle['description'] ?? ''); ?></p>
 
                             <div class="card-actions">
-                                <a href="product.php?id=<?php echo $vehicle['id']; ?>" class="accent-button">Show Details</a>
+                                <?php if ($isLoggedIn): ?>
+                                    <a href="product.php?id=<?php echo $vehicle['id']; ?>" class="accent-button">Show Details</a>
+                                <?php else: ?>
+                                    <a href="login.php" class="accent-button" style="background: #1e1b4b !important;">Login to Add to Garage</a>
+                                <?php endif; ?>
                             </div>
                         </div>
 

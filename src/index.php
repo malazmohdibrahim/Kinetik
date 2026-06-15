@@ -32,7 +32,7 @@ try {
                 <a href="contact.php">Contact</a>
                 <a href="garage.php">my garage</a>
                 <a href="login.php">Login</a>
-                <a href="admin.php">Admin</a>
+                
             </div>
         </div>
     </nav>
