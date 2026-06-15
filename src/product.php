@@ -162,18 +162,20 @@ try {
                 </div>
             </div>
 
-            <div class="dual-action-grid">
+            <div class="dual-action-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <?php if ($isLoggedIn): ?>
                     <button type="button" id="bookDriveBtn" class="cta-secondary">Book Test Drive</button>
 
                     <form action="" method="POST" style="margin: 0;">
                         <input type="hidden" name="action_type" value="stage_asset">
-                        <button type="submit" class="cta-primary">Add to My Garage</button>
+                        <button type="submit" class="cta-primary" style="width: 100%;">Add to My Garage</button>
                     </form>
                 <?php else: ?>
-                    <div style="grid-column: span 2; text-align: center; padding: 10px 0;">
-                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">Please log in to book a test drive or save cars to your garage.</p>
-                        <a href="login.php" class="cta-primary" style="display: inline-block; text-decoration: none; background: #1e1b4b !important; padding: 12px 40px;">Login first</a>
+                    <div style="grid-column: span 2; text-align: center; padding: 20px 10px; background: rgba(255, 255, 255, 0.01); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 4px;">
+                        <p style="font-size: 13px; color: #888; margin-bottom: 16px; font-weight: 500;">Please log in to unlock test drives or build your performance garage allocation.</p>
+                        <a href="login.php" class="cta-primary" style="display: inline-block; text-align: center; width: auto; min-width: 200px; box-sizing: border-box; padding: 14px 32px; background: #1e1b4b; color: #fff; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; text-decoration: none; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.1); transition: background 0.2s ease;">
+                            Login first
+                        </a>
                     </div>
                 <?php endif; ?>
             </div>
