@@ -107,6 +107,8 @@ try {
             <div class="nav-links">
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact us</a>
                 <a href="garage.php" class="active">My Garage</a>
             </div>
         </div>
@@ -116,8 +118,8 @@ try {
         
         <div id="popupOverlay" style="display: none; opacity: 0; transition: opacity 0.3s ease; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); align-items: center; justify-content: center; z-index: 9999;">
             <div class="popup-card" style="background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); padding: 40px; text-align: center; border-radius: 8px; max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-                <h3 style="letter-spacing: 2px; color: #fff; margin-bottom: 12px; font-weight: 900; font-family: sans-serif;">⚡ ACTION INITIALIZED</h3>
-                <p style="color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 24px; font-family: sans-serif;">Test drive arrangement logged. Our concierge team at the Kigali staging hub will finalize tracking credentials shortly.</p>
+                <h3 style="letter-spacing: 2px; color: #fff; margin-bottom: 12px; font-weight: 900; font-family: sans-serif;">CONFIRMED</h3>
+                <p style="color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 24px; font-family: sans-serif;">We will contact you shortly.</p>
                 <button id="closePopup" style="background: #fff; color: #000; border: none; padding: 12px 28px; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; cursor: pointer;">Acknowledge</button>
             </div>
         </div>
@@ -171,8 +173,8 @@ try {
                     </form>
                 <?php else: ?>
                     <div style="grid-column: span 2; text-align: center; padding: 10px 0;">
-                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">You must sign in to save assets or coordinate operations on our staging map.</p>
-                        <a href="login.php" class="cta-primary" style="display: inline-block; text-decoration: none; background: #1e1b4b !important; padding: 12px 40px;">Login to Access Features</a>
+                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">login first</p>
+                        <a href="login.php" class="cta-primary" style="display: inline-block; text-decoration: none; background: #1e1b4b !important; padding: 12px 40px;">Login first</a>
                     </div>
                 <?php endif; ?>
             </div>

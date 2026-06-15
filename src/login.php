@@ -14,24 +14,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         if ($action === 'register') {
             $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("INSERT INTO users (full_name, email, password_hash, phone) VALUES (?, ?, ?, ?)");
+            // Default users are explicitly saved with the 'customer' role
+            $stmt = $pdo->prepare("INSERT INTO users (full_name, email, password_hash, phone, role) VALUES (?, ?, ?, ?, 'customer')");
             $stmt->execute([$fullName, $email, $hashed, $phone]);
             $message = "Identity provisioned. You may now login.";
         } else {
             $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch();
+            
             if ($user && password_verify($password, $user['password_hash'])) {
                 $_SESSION['user_id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
-                header("Location: index.php");
+                $_SESSION['role'] = $user['role'] ?? 'customer'; // Assign role context to session
+                
+                // Smart Role Routing Redirect
+                if ($_SESSION['role'] === 'admin') {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: index.php");
+                }
                 exit();
             } else {
                 $message = "Authentication failure.";
             }
         }
     } catch (Exception $e) {
-        $message = "Registration Error: " . $e->getMessage();
+        $message = "System Exception: " . $e->getMessage();
     }
 }
 ?>
@@ -44,14 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
     <main class="glass-panel" style="width: 450px; padding: 40px;">
-        <h2 style="text-align:center; margin-bottom:20px;">SYSTEM ACCESS</h2> <nav class="navbar">
-    
-    </nav>
-        <?php if($message) echo "<p style='color:var(--accent-red); text-align:center; font-size:12px;'>$message</p>"; ?>
+        <h2 style="text-align:center; margin-bottom:20px;">SYSTEM ACCESS</h2> 
+        
+        <?php if($message) echo "<p style='color:var(--accent-red, #f43f5e); text-align:center; font-size:12px; margin-bottom: 15px;'>$message</p>"; ?>
         
         <form method="POST">
             <div class="form-group" id="reg-fields" style="display:none;">
-              
                 <label>Full Name</label>
                 <input type="text" name="full_name" style="width:100%; margin-bottom:10px;">
                 <label>Phone Contact</label>
@@ -66,13 +72,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="password" required style="width:100%;">
             </div>
             
-            <div style="display:flex; gap:10px; margin-top:20px;">
+            <div style="display:flex; gap:10px; margin-top:20px; margin-bottom: 15px;">
                 <button type="submit" name="action" value="login" class="cta-primary" style="flex:1;">LOGIN</button>
                 <button type="button" id="toggle-btn" class="cta-primary" style="flex:1; background:#333 !important;" onclick="toggleReg()">NEW ACCOUNT</button>
                 <button type="submit" name="action" value="register" id="reg-submit" class="cta-primary" style="display:none; flex:1;">REGISTER</button>
             </div>
         </form>
-            <a href="index.php">return home </a>
+        <div style="text-align: center;">
+            <a href="index.php" style="color: #888; font-size: 13px; text-decoration: none;">return home</a>
+        </div>
     </main>
 
     <script>
