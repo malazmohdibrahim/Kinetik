@@ -97,7 +97,7 @@ try {
         <div class="nav-container">
             <a href="admin.php" class="logo">KINETIK<span>.</span>OPERATIONS</a>
             <div class="nav-links">
-                <a href="logout.php" style="color: #f43f5e;">Secure Exit</a>
+                <a href="index.php" style="color: #f43f5e;">Secure Exit</a>
             </div>
         </div>
     </nav>
