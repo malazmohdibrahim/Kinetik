@@ -4,10 +4,17 @@ require_once 'database/connection.php';
 
 // 1. Context initialization parameters
 $vehicleId = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-$customerId = 1; // Systemic baseline account reference token matching your customer schema
+$isLoggedIn = isset($_SESSION['user_id']);
+$customerId = $isLoggedIn ? $_SESSION['user_id'] : null;
 
 // 2. DATABASE MECHANICS: Intercept submission and write directly into order_details schema
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_POST['action_type'] === 'stage_asset') {
+    // Hard check: Block processing if an unauthenticated user somehow targets the endpoint
+    if (!$isLoggedIn) {
+        header("Location: login.php");
+        exit();
+    }
+
     try {
         $pdo->beginTransaction();
 
@@ -139,10 +146,10 @@ try {
                     <p class="product-price">$<?php echo number_format($car['price']); ?></p>
                 </div>
             </div>
-            <p class="product-description-stacked"><?php echo htmlspecialchars($car['description']); ?></p>
+            <p class="product-description-stacked"><?php echo htmlspecialchars($car['description'] ?? ''); ?></p>
             <div class="performance-matrix-stacked">
-                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['horsepower']); ?> BHP</span><span class="matrix-label">Output Power</span></div>
-                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['top_speed_kmh']); ?> km/h</span><span class="matrix-label">V-Max Velocity</span></div>
+                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['horsepower'] ?? 'N/A'); ?> BHP</span><span class="matrix-label">Output Power</span></div>
+                <div class="matrix-item"><span class="matrix-value"><?php echo htmlspecialchars($car['top_speed_kmh'] ?? 'N/A'); ?> km/h</span><span class="matrix-label">V-Max Velocity</span></div>
                 <div class="matrix-item"><span class="matrix-value">Kigali Hub</span><span class="matrix-label">location</span></div>
             </div>
         </section>
@@ -150,18 +157,24 @@ try {
         <section class="payment-panel-stacked glass-panel">
             <div class="secure-badge-row">
                 <div class="secure-title">
-                   
                     <p> do you like this car?  </p>
                 </div>
             </div>
 
             <div class="dual-action-grid">
-                <button type="button" id="bookDriveBtn" class="cta-secondary">Book Test Drive</button>
+                <?php if ($isLoggedIn): ?>
+                    <button type="button" id="bookDriveBtn" class="cta-secondary">Book Test Drive</button>
 
-                <form action="" method="POST">
-                    <input type="hidden" name="action_type" value="stage_asset">
-                    <button type="submit" class="cta-primary">Add to My Garage</button>
-                </form>
+                    <form action="" method="POST" style="margin: 0;">
+                        <input type="hidden" name="action_type" value="stage_asset">
+                        <button type="submit" class="cta-primary">Add to My Garage</button>
+                    </form>
+                <?php else: ?>
+                    <div style="grid-column: span 2; text-align: center; padding: 10px 0;">
+                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">You must sign in to save assets or coordinate operations on our staging map.</p>
+                        <a href="login.php" class="cta-primary" style="display: inline-block; text-decoration: none; background: #1e1b4b !important; padding: 12px 40px;">Login to Access Features</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>
