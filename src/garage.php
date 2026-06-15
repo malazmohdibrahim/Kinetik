@@ -2,8 +2,14 @@
 session_start();
 require_once 'database/connection.php';
 
-// Systemic profile token baseline
-$customerId = 1; 
+// Enforce active authentication session gatekeeping
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Systemic profile token baseline mapped dynamic from current user session
+$customerId = $_SESSION['user_id']; 
 $totalPortfolioValue = 0;
 $allocatedCars = [];
 
@@ -72,7 +78,7 @@ try {
             <div class="nav-links">
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
-                
+                <a href="garage.php" class="active">My Garage</a>
             </div>
         </div>
     </nav>
@@ -88,7 +94,7 @@ try {
             <div class="glass-panel empty-garage-card" style="text-align: center; padding: 80px 40px; max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px;">
                 <h3 style="font-size: 18px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; color: #fff;">YOUR GARAGE IS EMPTY</h3>
                 <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px;">Browse our collection to see if anything represents what ypure looking for.</p>
-                <a href="index.php" class="cta-primary" style="display: inline-block; padding: 12px 24px; background: #fff; color: #000; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; text-decoration: none; border-radius: 4px;">Browse Showroom Inventory</a>
+                <a href="collection.php" class="cta-primary" style="display: inline-block; padding: 12px 24px; background: #fff; color: #000; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; text-decoration: none; border-radius: 4px;">Browse Showroom Inventory</a>
             </div>
         <?php else: ?>
             <div class="garage-dashboard-grid" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; align-items: start;">
@@ -119,33 +125,15 @@ try {
 
                 <section class="portfolio-summary-column">
                     <div class="glass-panel summary-sticky-card" style="padding: 30px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; position: sticky; top: 30px;">
-                        <h3 style="font-size: 16px; font-weight: 900; letter-spacing: 1.5px; color: #fff; text-transform: uppercase;"> METRICS</h3>
+                        <h3 style="font-size: 16px; font-weight: 900; letter-spacing: 1.5px; color: #fff; text-transform: uppercase;">METRICS</h3>
                         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 15px 0;">
                         
                         <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 13px;">
-                            <span class="summary-label" style="color: var(--text-muted);">Allocated Rows:</span>
-                            <span class="summary-value" style="font-weight: 600; color: #fff;"><?php echo count($allocatedCars); ?> Record Entities</span>
-                        </div>
-                        
-                        <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 13px;">
-                            <span class="summary-label" style="color: var(--text-muted);">Staging Hub Location:</span>
-                            <span class="summary-value" style="font-weight: 600; color: #fff;">Kigali, RW</span>
-                        </div>
-
-                        <div class="summary-row total-valuation-row" style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1);">
-                            <span class="summary-label" style="font-size: 14px; font-weight: 700; color: #fff;">Combined Portfolio Value:</span>
-                            <span class="summary-value" style="font-size: 24px; font-weight: 900; color: #fff;">$<?php echo number_format($totalPortfolioValue); ?></span>
-                        </div>
-
-                        <div class="summary-checkout-actions" style="margin-top: 30px;">
-                            <form action="checkout.php" method="GET">
-                                <button type="submit" class="cta-primary" style="width: 100%; border: none; padding: 14px; background: #e62020; color: #000; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; border-radius: 4px; cursor: pointer;">checkout</button>
-                            </form>
-                            <a href="index.php" class="continue-showroom-link" style="display: block; text-align: center; margin-top: 16px; font-size: 12px; color: var(--text-muted); text-decoration: none;">← Return to collection</a>
+                            <span style="color: var(--text-muted);">Total Value Assessed</span>
+                            <span style="font-weight: bold; color: #fff;">$<?php echo number_format($totalPortfolioValue); ?></span>
                         </div>
                     </div>
                 </section>
-
             </div>
         <?php endif; ?>
     </main>

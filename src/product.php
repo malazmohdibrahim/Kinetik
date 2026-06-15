@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_P
         if ($activeOrder) {
             $orderId = $activeOrder['id'];
         } else {
-            // FIXED: Providing clean systemic baseline defaults for required fields to satisfy strict schema constraints
             $createOrder = $pdo->prepare("
                 INSERT INTO orders (
                     customer_id, 
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_type']) && $_P
                     total_amount, 
                     payment_method, 
                     shipping_address
-                ) VALUES (?, 'Pending', 0.00, 'bank transfer', 'Staging Collection - Kigali Hub')
+                ) VALUES (?, 'Pending', 0.00, 'Bank Transfer', 'Staging Collection - Kigali Hub')
             ");
             $createOrder->execute([$customerId]);
             $orderId = $pdo->lastInsertId();
@@ -159,7 +158,7 @@ try {
         <section class="payment-panel-stacked glass-panel">
             <div class="secure-badge-row">
                 <div class="secure-title">
-                    <p> do you like this car?  </p>
+                    <p>Do you like this car?</p>
                 </div>
             </div>
 
@@ -173,7 +172,7 @@ try {
                     </form>
                 <?php else: ?>
                     <div style="grid-column: span 2; text-align: center; padding: 10px 0;">
-                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">login first</p>
+                        <p style="font-size: 13px; color: #888; margin-bottom: 15px;">Please log in to book a test drive or save cars to your garage.</p>
                         <a href="login.php" class="cta-primary" style="display: inline-block; text-decoration: none; background: #1e1b4b !important; padding: 12px 40px;">Login first</a>
                     </div>
                 <?php endif; ?>
