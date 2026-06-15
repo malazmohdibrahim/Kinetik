@@ -1,4 +1,4 @@
-name: Kinetik Core CI
+name: Kinetik Core CI/CD
 
 on:
   push:
@@ -35,3 +35,29 @@ jobs:
         run: |
           docker compose config
           echo "Success! The Docker Compose architecture and configuration are structurally valid."
+
+  deploy:
+    needs: build-and-test
+    # Only run the deployment block if the push event happened directly on the main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Sync Files to InfinityFree via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # InfinityFree serves web files strictly from the htdocs directory
+          server-dir: htdocs/
+          # Exclude git, docker, and local database files from loading onto the live production host
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/Dockerfile
+            **/docker-compose.yml
+            **/*.sql
