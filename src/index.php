@@ -1,8 +1,11 @@
 <?php
-// 1. Establish the unified secure database connection link
+// 1. Initialize or resume the global user session context
+session_start();
+
+// 2. Establish the unified secure database connection link
 require_once 'database/connection.php';
 
-// 2. Query the data layer to fetch a restricted subset of high-performance vehicles for the home showcase
+// 3. Query the data layer to fetch a restricted subset of high-performance vehicles for the home showcase
 try {
     // Selects the first two registered models to act as the featured showroom variants
     $stmt = $pdo->query("SELECT * FROM vehicles ORDER BY created_at ASC LIMIT 2");

@@ -1,13 +1,16 @@
 <?php
-// 1. Establish the unified secure data layer link
+// 1. Initialize or resume the global user session context
+session_start();
+
+// 2. Establish the unified secure data layer link
 require_once 'database/connection.php';
 
-// 2. Extract dynamic filter and search parameters from the request query string
+// 3. Extract dynamic filter and search parameters from the request query string
 $search   = isset($_GET['search']) ? trim($_GET['search']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
 $brand    = isset($_GET['brand']) ? trim($_GET['brand']) : '';
 
-// 3. Construct the base relational query pattern
+// 4. Construct the base relational query pattern
 $query = "SELECT * FROM vehicles WHERE 1=1";
 $params = [];
 
@@ -67,11 +70,10 @@ try {
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
                 <a href="index.php">Home</a>
+                <a href="collection.php" class="active">Collection</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
                 <a href="garage.php">My Garage</a>
-                
-                
             </div>
         </div>
     </nav>
