@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $order) {
                         <option>Mobile Money</option><option>Crypto</option>
                     </select>
                 </div>
-                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px;">Confirm </button>
+                <button type="submit" class="cta-primary" style="width: 100%; margin-top: 20px;">Confirm</button>
             </form>
         <?php else: ?>
             <p>No pending orders found. <a href="index.php">Browse inventory</a>.</p>

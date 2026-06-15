@@ -17,7 +17,6 @@
                 <a href="collection.php">Collection</a>
                 <a href="garage.php">My Garage</a>
                 <a href="about.php">About Us</a>
-                <a href="contact.php" class="active">Contact us</a>
             </div>
         </div>
     </nav>

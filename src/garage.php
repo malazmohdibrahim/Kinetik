@@ -76,11 +76,9 @@ try {
         <div class="nav-container">
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
-                <a href="index.php">Home</a>
+                <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
-                <a href="garage.php" class="active">My Garage</a>
-                <a href="about.php">About Us</a>
-                <a href="contact.php">Contact us</a>
+               
             </div>
         </div>
     </nav>
