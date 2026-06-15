@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <form method="POST">
             <div class="form-group" id="reg-fields" style="display:none;">
+                  <a href="index.php">return</a>
                 <label>Full Name</label>
                 <input type="text" name="full_name" style="width:100%; margin-bottom:10px;">
                 <label>Phone Contact</label>
