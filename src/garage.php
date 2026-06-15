@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Systemic profile token baseline mapped dynamic from current user session
+// Systemic profile token baseline mapped dynamically from current user session
 $customerId = $_SESSION['user_id']; 
 $totalPortfolioValue = 0;
 $allocatedCars = [];
@@ -78,7 +78,7 @@ try {
             <div class="nav-links">
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
-                <a href="garage.php" class="active">My Garage</a>
+               
             </div>
         </div>
     </nav>
@@ -129,11 +129,29 @@ try {
                         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 15px 0;">
                         
                         <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 13px;">
-                            <span style="color: var(--text-muted);">Total Value Assessed</span>
-                            <span style="font-weight: bold; color: #fff;">$<?php echo number_format($totalPortfolioValue); ?></span>
+                            <span class="summary-label" style="color: var(--text-muted);">Vehicles Saved:</span>
+                            <span class="summary-value" style="font-weight: 600; color: #fff;"><?php echo count($allocatedCars); ?></span>
+                        </div>
+                        
+                        <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 13px;">
+                            <span class="summary-label" style="color: var(--text-muted);">Staging Showroom:</span>
+                            <span class="summary-value" style="font-weight: 600; color: #fff;">Kigali Hub</span>
+                        </div>
+
+                        <div class="summary-row total-valuation-row" style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1);">
+                            <span class="summary-label" style="font-size: 14px; font-weight: 700; color: #fff;">Total Estimated Price:</span>
+                            <span class="summary-value" style="font-size: 24px; font-weight: 900; color: #fff;">$<?php echo number_format($totalPortfolioValue); ?></span>
+                        </div>
+
+                        <div class="summary-checkout-actions" style="margin-top: 30px;">
+                            <form action="checkout.php" method="GET">
+                                <button type="submit" class="cta-primary" style="width: 100%; border: none; padding: 14px; background: #fff; color: #000; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: background 0.2s ease;">checkout</button>
+                            </form>
+                            <a href="collection.php" class="continue-showroom-link" style="display: block; text-align: center; margin-top: 16px; font-size: 12px; color: var(--text-muted); text-decoration: none;">← Return to collection</a>
                         </div>
                     </div>
                 </section>
+
             </div>
         <?php endif; ?>
     </main>
