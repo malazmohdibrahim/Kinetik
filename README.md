@@ -1,4 +1,4 @@
-# KINETIK - Online Car Dealership Management System
+# KINETIK - Luxury Digital Automotive Showroom 
 
 ---
 
@@ -35,35 +35,33 @@
 ---
 
 # 1. Introduction
-
-KINETIK is a modern web-based car dealership platform designed to simplify vehicle inventory management and improve the customer experience. The system enables administrators to manage vehicles, brands, and categories while allowing customers to browse available vehicles online through a responsive and user-friendly interface.
-
+KINETIK is a specialized high-performance web-based car dealership and staging application designed for exotic sports car collectors and enthusiasts in Kigali, Rwanda. The system bridges the gap between premium global automotive listings and local buyers by providing, dynamic specifications, and custom persistent customer garages.
+KINETIK is designed to simplify vehicle inventory management and improve the customer experience. The system enables administrators to manage vehicles, brands, and categories while allowing customers to browse available vehicles online through a responsive and user-friendly interface.
 The project was developed using PHP, MySQL, HTML, CSS, JavaScript, Docker, and GitHub. It demonstrates practical application of web development, database management, deployment, and DevOps concepts.
 
 ---
 
 # 2. Problem Statement
-
-Many small and medium-sized car dealerships still rely on manual inventory tracking methods, spreadsheets, and social media advertisements. These approaches often lead to inconsistent vehicle information, poor inventory organization, and limited customer accessibility.
-
-A centralized web application is needed to efficiently manage vehicle listings while providing customers with easy access to accurate vehicle information.
+In Rwanda, there is currently no dedicated online platform focused on managing and selling vehicles through a complete e-commerce system. Most car dealerships rely on social media platforms, messaging applications, spreadsheets, or manual records to advertise and manage their inventory.
+These methods make it difficult to keep vehicle information organized and up to date. Customers often have to contact sellers directly to confirm availability, pricing, and vehicle specifications. As a result, finding accurate information can be time-consuming and inconvenient for both customers and dealerships.
+In addition, dealerships face challenges in tracking available vehicles, managing inventory efficiently, and presenting their vehicles in a professional and centralized manner online.
+Therefore, there is a need for a web-based car dealership management system that allows dealerships to manage vehicle listings digitally while providing customers with easy access to vehicle information, pricing, and availability through a single online platform.
 
 ---
 
 # 3. Objectives
-
-### General Objective
-
-To develop a web-based car dealership management system that improves inventory management and enhances customer access to vehicle information.
-
+### General Objective:
+To develop a web-based luxury and sports car dealership platform in Rwanda that allows customers to browse available vehicles, view detailed car information, and purchase vehicles online.
 ### Specific Objectives
-
-- Manage vehicle inventory digitally.
-- Organize vehicles by brands and categories.
-- Provide secure administrator authentication.
-- Improve customer browsing experience.
-- Deploy the application online.
-- Implement modern development and deployment practices.
+### Specific Objectives
+* To provide an online platform where customers can browse luxury and sports cars available in Rwanda.
+* To display detailed vehicle information, including specifications, pricing, and images.
+* To organize vehicles by brands and categories for easier navigation.
+* To provide secure administrator access for managing vehicle listings.
+* To improve the customer experience when searching for and exploring vehicles online.
+* To allow administrators to add, update, and remove vehicle listings efficiently.
+* To deploy the application online so it can be accessed from anywhere.
+* To use Docker and GitHub to support development, deployment, and maintenance of the system.
 
 ---
 
