@@ -220,7 +220,7 @@ https://github.com/malazmohdibrahim/Kinetik
 
 https://kinetik.freedev.app/src/index.php
 ### alternative
-https://kinetik.onrender.com/garage.php
+https://kinetik.onrender.com/index.php
 
 
 ---
