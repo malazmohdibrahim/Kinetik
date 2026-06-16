@@ -148,15 +148,15 @@ The frontend handles user interactions and displays content. PHP processes busin
 
 ## Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](screenshots/index.png)
 
-*Description: Landing page displaying featured vehicles.*
+*Description: Landing page displaying featured vehicles .*
 
 ---
 
-## Inventory Page
+## Collection Page
 
-![Inventory](screenshots/inventory.png)
+![collection](screenshots/kinetik.freedev.app_src_collection.php.png)
 
 *Description: Displays all available vehicles.*
 
@@ -164,7 +164,15 @@ The frontend handles user interactions and displays content. PHP processes busin
 
 ## Vehicle Details Page
 
-![Vehicle Details](screenshots/details.png)
+![Vehicle Details](screenshots/product-details.png)
+
+*Description: Shows detailed information about a selected vehicle.*
+
+---
+
+## cart page:
+
+![cart](screenshots/garage.png)
 
 *Description: Shows detailed information about a selected vehicle.*
 
@@ -172,9 +180,31 @@ The frontend handles user interactions and displays content. PHP processes busin
 
 ## Admin Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/admin.png)
 
 *Description: Administration interface for managing inventory.*
+
+---
+
+## contact us 
+
+![contact us](screenshots/contact.png)
+
+*Description: contact form with topic specification.*
+
+---
+## about us 
+
+![about us](screenshots/about.png)
+
+*Description: our mission , story and moto.*
+
+---
+## checkout
+
+![checkout](screenshots/checkout.png)
+
+*Description: choose payment option and confirm payment*
 
 ---
 
