@@ -210,11 +210,7 @@ The frontend handles user interactions and displays content. PHP processes busin
 
 # 8. GitHub Repository Link
 
-**Repository URL**
-
-```text
-https://github.com/YOUR_USERNAME/kinetik
-```
+https://github.com/malazmohdibrahim/Kinetik
 
 ---
 
@@ -236,25 +232,28 @@ The project uses GitHub for version control and automated deployment.
 ### Workflow
 
 ```text
-Developer
- ↓
-GitHub Repository
- ↓
-Automatic Build Process
- ↓
-Render Deployment
- ↓
-Live Application
+Developer Repository Push
+            ↓
+  GitHub Webhook Activation
+            ↓
+ Automated Cloud Build Routine
+            ↓
+ Environment Image Compilation
+            ↓
+   Health Verification Checks
+            ↓
+Container Hot-Swap Live Switch
 ```
 
-Whenever code is pushed to GitHub, the deployment platform automatically rebuilds and deploys the latest version of the application.
+Whenever code is pushed to GitHub, infinityfree automatically rebuilds and deploys the latest version of the application.
 
 ---
 
 # 11. Challenges Encountered
 
-- Docker configuration and container management.
-- Database connectivity issues.
+- Docker installation took over 3 hours 
+- Database connectivity issues : containers kept getting deleted every time docker restarted .
+- 
 - Deployment troubleshooting.
 - Image upload handling.
 - Responsive design implementation.
