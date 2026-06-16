@@ -69,43 +69,75 @@ To develop a web-based luxury and sports car dealership platform in Rwanda that 
 
 | Feature | Description |
 |----------|------------|
-| Authentication | Secure administrator login system |
-| Vehicle Management | Add, update and delete vehicles |
-| Brand Management | Manage vehicle brands |
-| Category Management | Organize vehicles by categories |
-| Inventory Display | Browse available vehicles |
-| Vehicle Details | Detailed information for each vehicle |
-| Responsive Design | Mobile and desktop compatibility |
-
+| Administrator Authentication | Secure login system that allows only authorized administrators to manage the dealership platform. |
+| Vehicle Management | Administrators can add, update, and remove luxury and sports car listings. |
+| Brand Management | Vehicles can be organized and managed according to their brands. |
+| Category Management | Vehicles can be grouped into categories such as Sports Cars, Supercars, SUVs, and Luxury Sedans. |
+| Vehicle Catalog | Customers can browse all available vehicles in the dealership. |
+| Vehicle Details Page | Customers can view detailed information including price, specifications, images, and descriptions. |
+| Search and Navigation | Customers can easily find vehicles by browsing categories and brands. |
+| Checkout Request System | Customers can submit their details and purchase requests for selected vehicles. |
+| Order Management | Purchase requests are stored and managed through the system database. |
+| Responsive Design | The platform is optimized for desktop, tablet, and mobile devices. |
+| Docker Integration | The application is containerized using Docker for consistent deployment across different environments. |
+| Online Deployment | The system is deployed online, allowing customers to access the dealership from anywhere. |
 ---
 
 # 5. Technologies Used
-
 | Category | Technology |
 |-----------|------------|
-| Frontend | HTML5, CSS3, JavaScript |
-| Backend | PHP |
-| Database | MySQL |
+| Frontend | HTML5, CSS3 (Custom Dark Theme Gradients & Glassmorphism Framework) |
+| Backend | PHP (Hypertext Preprocessor with object-oriented session tracking parameters) |
+| Database | MySQL Server Database Engine running structured indexing using phpmmyadmin |
+| Persistence Layer | PDO (PHP Data Objects) utilizing bound parameters for secure SQL interaction |
 | Version Control | Git, GitHub |
-| Containerization | Docker |
-| Deployment | Render |
+| Containerization | Docker Engine with specialized environment containers |
+| Cloud Infrastructure | infintyfree |
 
 ---
-
 # 6. System Architecture
 
 ```text
-User
- ↓
-Web Browser
- ↓
-Frontend (HTML, CSS, JavaScript)
- ↓
-PHP Backend
- ↓
-MySQL Database
+                    Customer / Administrator
+                              ↓
+                         Web Browser
+                              ↓
+          Frontend (HTML, CSS, JavaScript)
+                              ↓
+                     PHP Application
+                              ↓
+                       MySQL Database
 ```
 
+### Architecture Description
+
+The KINETIK system follows a three-tier architecture consisting of the presentation layer, application layer, and data layer.
+
+#### Presentation Layer
+
+The presentation layer is developed using HTML, CSS, and JavaScript. It provides the user interface through which customers can browse luxury and sports cars and administrators can manage vehicle listings.
+
+#### Application Layer
+
+The application layer is developed using PHP. It handles business logic, user authentication, vehicle management, order processing, and communication between the frontend and the database.
+
+#### Data Layer
+
+The data layer uses MySQL to store and manage application data. This includes vehicle information, brands, categories, administrator accounts, customer orders, and checkout details.
+
+#### Deployment Architecture
+
+```text
+Developer
+    ↓
+GitHub Repository
+    ↓
+Docker Container
+    ↓
+Online Server
+    ↓
+Users Access KINETIK
+```
 ### Architecture Description
 
 The frontend handles user interactions and displays content. PHP processes business logic and communicates with the MySQL database, which stores application data such as vehicles, brands, categories, and administrator accounts.
