@@ -166,7 +166,7 @@ The frontend handles user interactions and displays content. PHP processes busin
 
 ![Vehicle Details](screenshots/product-details.png)
 
-*Description: Shows detailed information about a selected vehicle.*
+*Description: Shows detailed information about a selected vehicle with 360 view of the car.*
 
 ---
 
@@ -223,7 +223,12 @@ https://github.com/YOUR_USERNAME/kinetik
 **Live Application**
 
 ```text
-https://YOUR_APP_URL.onrender.com
+https://kinetik.freedev.app/src/index.php
+```
+**alternative**
+
+```text
+https://kinetik.onrender.com/garage.php
 ```
 
 ---
