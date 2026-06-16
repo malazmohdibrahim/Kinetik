@@ -226,10 +226,8 @@ https://github.com/YOUR_USERNAME/kinetik
 https://kinetik.freedev.app/src/index.php
 ```
 **alternative**
-
-```text
 https://kinetik.onrender.com/garage.php
-```
+
 
 ---
 
