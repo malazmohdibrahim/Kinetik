@@ -70,9 +70,9 @@ try {
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
                 <a href="index.php">Home</a>
-                <a href="collection.php" class="active">Collection</a>
-                <a href="about.php">About</a>
-                <a href="contact.php">Contact</a>
+              
+                <a href="about.php">About us </a>
+                <a href="contact.php">Contact us </a>
                 <a href="garage.php">My Garage</a>
             </div>
         </div>

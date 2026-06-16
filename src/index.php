@@ -29,7 +29,7 @@ try {
         <div class="nav-container">
             <a href="index.php" class="logo">KINETIK<span>.</span></a>
             <div class="nav-links">
-                <a href="index.php" class="active">Home</a>
+             
                 <a href="collection.php">Collection</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>

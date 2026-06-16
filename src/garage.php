@@ -78,6 +78,8 @@ try {
             <div class="nav-links">
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
+                 <a href="about.php">About</a>
+                <a href="contact.php">Contact us</a>
             </div>
         </div>
     </nav>
