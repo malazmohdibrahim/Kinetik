@@ -254,9 +254,14 @@ Whenever code is pushed to GitHub, infinityfree automatically rebuilds and deplo
 - Docker installation took over 3 hours 
 - Database connectivity issues : containers kept getting deleted every time docker restarted .
 - huge CI conflicts caused by docker database container had to delete everything and start fresh
-  ![challenge 1](screenshots/challenge 1.png)
-   ![challenge 2](screenshots/challenge 2.png)
-   ![challenge 3](screenshots/challenge 3.png)
+
+  
+  ![challenge 1](screenshots/challenge1.png)
+   ![challenge 2](screenshots/challenge2.png)
+   ![challenge 3](screenshots/challenge3.png)
+
+
+  
 - Image upload on database .
 - the 360 view feature.
 - no deployment platfrom supports containerization (ie. docker).
