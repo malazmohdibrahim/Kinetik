@@ -31,8 +31,8 @@ try {
             <div class="nav-links">
              
                 <a href="collection.php">Collection</a>
-                <a href="about.php">About</a>
-                <a href="contact.php">Contact</a>
+                <a href="about.php">About us </a>
+                <a href="contact.php">Contact us </a>
                 <a href="garage.php">my garage</a>
                 <a href="login.php">Login</a>
                 

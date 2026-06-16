@@ -16,6 +16,8 @@
                 <a href="index.php">home</a>
                 <a href="collection.php">Collection</a>
                 <a href="garage.php">My Garage</a>
+                 <a href="about.php">About us </a>
+                
             </div>
         </div>
     </nav>
