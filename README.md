@@ -253,28 +253,33 @@ Whenever code is pushed to GitHub, infinityfree automatically rebuilds and deplo
 
 - Docker installation took over 3 hours 
 - Database connectivity issues : containers kept getting deleted every time docker restarted .
-- 
-- Deployment troubleshooting.
-- Image upload handling.
-- Responsive design implementation.
-- Managing project versions using Git.
+- huge CI conflicts caused by docker database container had to delete everything and start fresh
+  ![challenge 1](screenshots/challenge1.png)
+   ![challenge 2](screenshots/challenge2.png)
+   ![challenge 3](screenshots/challenge3.png)
+- Image upload on database .
+- the 360 view feature.
+- no deployment platfrom supports containerization (ie. docker).
+- render required chnging the database from mySQL to PostGres.
+- railway keeps crashing after deployment no reasons provided
+- infinity free requires manual upload of everything so it wasnt time efficient but the only working option.
+- at one point a collegue of mine (registeration number 24363/2024) had to step in and help with deployment he created a completely new repository on another laptop and imported all the codes and dockerfiles and used postgres instead of mysql to be compatiable with render this is the alternative deployment link : https://kinetik.onrender.com/index.php
 
 ---
 
 # 12. Future Work
 
 Future enhancements include:
-
-- Customer registration and login.
-- Vehicle reservation system.
-- Online payment integration.
-- Email notifications.
-- AI-powered vehicle recommendations.
-- Mobile application development.
-- Advanced analytics dashboard.
+- Interactive 360° Vector Rendering Modality: Introduce vector manipulation layers to enable driving clients to inspect multi-angle vehicle panels interactively.
+- Real-time Escrow Payment Callbacks: Integrate automated financial webhooks to watch payment verification states in real time.
+- Logistics Transport Tracking API: Deploy delivery progression interfaces showing asset routing states directly from the staging hub to localized physical delivery coordinates in Kigali.
+- Automated Performance Maintenance Records: Implement automated diagnostic tracking models to help clients coordinate mechanical upkeep schedules from their private garages.
 
 ---
 
 # 13. Conclusion
 
-KINETIK successfully provides a centralized platform for managing dealership inventory and presenting vehicle information online. The project demonstrates the practical application of web development technologies, database integration, deployment, and containerization while delivering a modern and scalable solution for automotive businesses.
+KINETIK successfully provides a modern online platform for a luxury and sports car dealership in Rwanda. The system allows customers to browse available vehicles, view detailed specifications, and submit purchase requests through an easy-to-use interface.
+The project demonstrates the practical use of web development technologies including HTML, CSS, JavaScript, PHP, MySQL, Docker, and GitHub. It also shows how e-commerce concepts can be applied to the automotive industry by making vehicle information more accessible to customers online.
+Through the development of KINETIK, a centralized and professional platform was created to support the promotion and sale of luxury and sports cars in Rwanda. The system improves the customer experience while providing an efficient way for administrators to manage vehicle listings and dealership information.
+Overall, KINETIK serves as a strong foundation for a modern automotive e-commerce platform and can be further expanded with additional features in future versions.
