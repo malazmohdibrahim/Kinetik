@@ -1,7 +1,7 @@
 # KINETIK - Luxury Digital Automotive Showroom 
 
 ---
-
+![logo](screenshots/logo.png)
 ## Student Information
 
 | Item | Details |
