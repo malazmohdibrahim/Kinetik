@@ -220,12 +220,10 @@ https://github.com/YOUR_USERNAME/kinetik
 
 # 9. Deployment Link
 
-**Live Application**
+### Live Application
 
-```text
 https://kinetik.freedev.app/src/index.php
-```
-**alternative**
+### alternative
 https://kinetik.onrender.com/garage.php
 
 
